@@ -110,6 +110,12 @@ namespace SH_hmjh_SemesterScoreReport
         public bool ExportEpost { get; set; }
 
         /// <summary>
+        /// 選擇專案名稱
+        /// </summary>
+        [FISCA.UDT.Field]
+        public string SelectProjectItem { get; set; }
+
+        /// <summary>
         /// 在儲存前，把資料填入儲存欄位中
         /// </summary>
         public void Encode()

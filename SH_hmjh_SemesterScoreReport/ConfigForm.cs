@@ -571,6 +571,7 @@ namespace SH_hmjh_SemesterScoreReport
                         Configure.RankFilterTagList.Add(item.ID);
                 }
             }
+            Configure.SelectProjectItem = cboConfigure.Text;
             Configure.ExportEpost = chkExportEPOST.Checked;
             Configure.Encode();
             Configure.Save();

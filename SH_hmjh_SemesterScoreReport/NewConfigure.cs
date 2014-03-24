@@ -29,7 +29,13 @@ namespace SH_hmjh_SemesterScoreReport
             if (checkBoxX1.Checked)
             {
                 Template = new Aspose.Words.Document(new MemoryStream(SH_hmjh_SemesterScoreReport.Properties.Resources.和美_個人學期成績單樣板));
-                this.SubjectLimit = 30;
+//                this.SubjectLimit = 30;                
+                List<string> fields = new List<string>(Template.MailMerge.GetFieldNames());
+                this.SubjectLimit = 0;
+                while (fields.Contains("科目名稱" + (this.SubjectLimit + 1)))
+                {
+                    this.SubjectLimit++;
+                }
                 this.WithSchoolYearScore = true;
                 this.WithPrevSemesterScore = true;
             }
@@ -46,22 +52,6 @@ namespace SH_hmjh_SemesterScoreReport
                     try
                     {
 
-
-                        //row["學期科目原始成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("原始成績");
-                        //row["學期科目補考成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("補考成績");
-                        //row["學期科目重修成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("重修成績");
-                        //row["學期科目手動調整成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("擇優採計成績");
-                        //row["學期科目學年調整成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("學年調整成績");
-                        //row["學期科目成績" + subjectIndex] = semesterSubjectScore.Score;
-
-                        //row["上學期科目原始成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("原始成績");
-                        //row["上學期科目補考成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("補考成績");
-                        //row["上學期科目重修成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("重修成績");
-                        //row["上學期科目手動調整成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("擇優採計成績");
-                        //row["上學期科目學年調整成績" + subjectIndex] = semesterSubjectScore.Detail.GetAttribute("學年調整成績");
-                        //row["上學期科目成績" + subjectIndex] = semesterSubjectScore.Score;
-
-                        //row["學年科目成績" + subjectIndex] = schoolYearSubjectScore.Score;
                         this.WithSchoolYearScore = false;
                         this.WithPrevSemesterScore = false;
                         Template = new Aspose.Words.Document(dialog.FileName);
