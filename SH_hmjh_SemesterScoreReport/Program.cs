@@ -793,8 +793,12 @@ namespace SH_hmjh_SemesterScoreReport
                         _dtEpost.Columns.Add("學校名稱");
                         _dtEpost.Columns.Add("學校地址");
                         _dtEpost.Columns.Add("學校電話");
-                        _dtEpost.Columns.Add("收件人地址");
-                        _dtEpost.Columns.Add("收件人");
+                        //_dtEpost.Columns.Add("收件人地址");
+                        //_dtEpost.Columns.Add("收件人");
+                        _dtEpost.Columns.Add("CN");
+                        _dtEpost.Columns.Add("POSTALCODE");
+                        _dtEpost.Columns.Add("POSTALADDRESS");
+
                         _dtEpost.Columns.Add("學年度");
                         _dtEpost.Columns.Add("學期");
                         _dtEpost.Columns.Add("班級");
@@ -3370,6 +3374,27 @@ namespace SH_hmjh_SemesterScoreReport
                                     break;
                                 }
                             }
+
+                            // 地址、收件人
+                            data["CN"] = dr["收件人"];
+                            // POSTALADDRESS
+                            string address = dr["收件人地址"].ToString();
+                            string zip1 = dr["通訊地址郵遞區號"].ToString() + " ";
+                            string zip2 = dr["戶籍地址郵遞區號"].ToString() + " ";
+                            if (address.Contains(zip1))
+                            {
+                                address = address.Replace(zip1, "");
+                                data["POSTALCODE"] = dr["通訊地址郵遞區號"].ToString();
+                            }
+
+                            if (address.Contains(zip2))
+                            {
+                                address = address.Replace(zip2, "");
+                                data["POSTALCODE"] = dr["戶籍地址郵遞區號"].ToString();
+                            }
+
+                            data["POSTALADDRESS"] = address;
+
 
                             _dtEpost.Rows.Add(data);
                         }
